@@ -32,8 +32,11 @@ class CommentInput extends Component{
     }
     handleSubmit () {
         if(this.props.onSubmit) {
-            const { username , content} = this.state;
-            this.props.onSubmit({username, content})  //将数据放入props
+            this.props.onSubmit({
+                username: this.state.username,
+                content: this.state.content,
+                createTime: +new Date()
+            })  //将数据放入props
         }
         this.setState({content: ''});
     }
