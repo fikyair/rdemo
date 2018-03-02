@@ -4,8 +4,10 @@ class Comment extends Component {
 
 
     static proTypes = {
-        comment: React.PropTypes.object.isRequired
+        comment: React.PropTypes.object.isRequired,
         //引入React.propTypes：React.PropTypes 提供很多验证器来验证传入数据的有效性，当向props传入无效数据时，JavaScript 控制台会抛出警告。
+        onDeleteComment: React.PropTypes.func,
+        index: React.PropTypes.number,
     }
     constructor (){
         super()
@@ -18,6 +20,9 @@ class Comment extends Component {
             5000
         )
     }
+    componentWillUnmount () {
+        clearInterval(this._timer)  //一条评论组件销毁时，要清楚计时器
+    }
 
     _updateTimeString(){
         const comment = this.props.comment
@@ -27,6 +32,11 @@ class Comment extends Component {
         })
     }
 
+    handleDeleteComment(){
+        if(this.props.onDeleteComment){
+            this.props.onDeleteComment(this.props.index)
+        }
+    }
         render(){
             return(
                 <div className='comment'>
@@ -35,6 +45,8 @@ class Comment extends Component {
                     </div>
                     <p>{this.props.comment.content}</p>
                     <sapn className='comment-createdtime'>{this.state.timeString}</sapn>
+                    <span className='comment-delete'
+                          onClick={this.handleDeleteComment.bind(this)}>删除</span>
                 </div>
 
 
