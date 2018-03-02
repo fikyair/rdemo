@@ -12,6 +12,10 @@ class CommentInput extends Component{
             content: '',
         }
     }
+    componentWillMount (){
+        this._loadUsername()
+    }
+
     componentDidMount () {
         this.textarea.focus()
     }
@@ -33,6 +37,22 @@ class CommentInput extends Component{
         }
         this.setState({content: ''});
     }
+
+    _saveUsername (username) {
+        localStorage.setItem('username', username);
+    }
+    handleUsernameBlur(event){
+        this._saveUsername(event.target.value)
+    }
+
+    _loadUsername (){
+        const username = localStorage.getItem('username');
+        if(username){
+            this.setState({
+                username
+            })
+        }
+    }
     render(){
         return(
             <div className='comment-input'>
@@ -40,7 +60,8 @@ class CommentInput extends Component{
                         <span className='comment-field-name'>用户名：</span>
                         <div className='comment-field-input'>
                             <input value={this.state.username}
-                                   onChange={this.handleUsernameChange.bind(this)}
+                                   onChange={this.handleUsernameChange.bind(this)} //监听用户名输入框失去焦点的事件 onBlur：
+                                   onBlur={this.handleUsernameBlur.bind(this)}
                             />
                         </div>
                     </div>
