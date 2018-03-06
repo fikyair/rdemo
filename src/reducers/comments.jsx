@@ -46,5 +46,3 @@ export const deleteComment = (commentIndex) =>{
         type: DELETE_COMMENT,commentIndex
     }
 }
-
-dispatch(initComments(comments))
