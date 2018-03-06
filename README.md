@@ -23,7 +23,7 @@ We commit to keeping the breaking changes minimal so you can upgrade `react-scri
 
 ## Sending Feedback
 
-We are always open to [your feedback](https://github.com/facebookincubator/create-react-app/issues).
+We are always open to [your feedback](https://github.com/fikyair/rdemo/issues).
 
 ## Folder Structure
 
