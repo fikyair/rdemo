@@ -1,7 +1,7 @@
 import React from 'react';
 import Comment from "./Comment";
 
-class CommentList extends React.Component {
+export default class CommentList extends React.Component {
 
     static propTypes = {
         comments: React.PropTypes.array,
@@ -34,5 +34,3 @@ class CommentList extends React.Component {
         )
     }
 }
-
-export default CommentList;

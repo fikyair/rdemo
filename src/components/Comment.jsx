@@ -1,6 +1,6 @@
 import React,{ Component} from 'react';
 
-class Comment extends Component {
+export default class Comment extends Component {
 
 
     static proTypes = {
@@ -65,5 +65,3 @@ class Comment extends Component {
             )
         }
 }
-
-export default Comment;

@@ -1,60 +1,56 @@
 import React, { Component } from 'react';
 
-class CommentInput extends Component{
+export default class CommentInput extends Component{
 
     static propTypes = {
-        onSubmit:React.PropTypes.func
+        onSubmit:React.PropTypes.func,
+        username: React.PropTypes.any,
+        onUserNameInputBlur: React.PropTypes.func
     }
-    constructor (){
-        super()
+
+    static defaultProps = {
+        username: ''
+    }
+    constructor (props){
+        super(props)
         this.state = {
-            username: '',
+            username: props.username,
             content: '',
         }
     }
-    componentWillMount (){
-        this._loadUsername()
-    }
-
     componentDidMount () {
         this.textarea.focus()
     }
+
+
+    handleUsernameBlur(event){
+        if(this.props.onUserNameInputBlur) {
+            this.props.onUserNameInputBlur(event.target.value)
+        }
+    }
+
     handleUsernameChange (event) {
         this.setState({
-            username:event.target.value,
+            username: event.target.value
         })
     }
 
     handleContentChange (event) {
         this.setState({
-            content: event.target.value,//没写这个的话是非受控组件
+            content: event.target.value
         })
     }
+
     handleSubmit () {
-        if(this.props.onSubmit) {
+        debugger
+        if (this.props.onSubmit) {
             this.props.onSubmit({
                 username: this.state.username,
                 content: this.state.content,
-                createTime: +new Date()
-            })  //将数据放入props
-        }
-        this.setState({content: ''});
-    }
-
-    _saveUsername (username) {
-        localStorage.setItem('username', username);
-    }
-    handleUsernameBlur(event){
-        this._saveUsername(event.target.value)
-    }
-
-    _loadUsername (){
-        const username = localStorage.getItem('username');
-        if(username){
-            this.setState({
-                username
+                createdTime: +new Date()
             })
         }
+        this.setState({ content: '' })
     }
     render(){
         return(
@@ -85,5 +81,3 @@ class CommentInput extends Component{
     }
 
 }
-
-export default CommentInput;
